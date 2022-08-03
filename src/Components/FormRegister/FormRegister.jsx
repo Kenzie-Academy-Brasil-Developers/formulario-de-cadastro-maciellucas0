@@ -1,17 +1,30 @@
 import { DivInput, Form, Navigation } from "./style";
 import logo from "../../Assets/Logo.png";
+import { Link, useNavigate } from "react-router-dom";
+
 const FormRegister = () => {
+  function CadastrandoNaApi() {}
+
+  const navigate = useNavigate();
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    navigate("/login", { replace: true });
+  }
+
   return (
     <>
       <Navigation>
         <img src={logo} alt="logo" />
-        <button>Voltar</button>
+        <Link to="/login">Voltar</Link>
       </Navigation>
-      <Form>
+
+      <Form onSubmit={handleSubmit}>
         <DivInput>
           <h1>Crie sua conta</h1>
           <span>Rápido e grátis, vamos nessa</span>
         </DivInput>
+
         <DivInput>
           <label htmlFor="nome">Nome</label>
           <input
@@ -21,6 +34,7 @@ const FormRegister = () => {
             name="nome"
           />
         </DivInput>
+
         <DivInput>
           <label htmlFor="email">Email</label>
           <input
@@ -30,6 +44,7 @@ const FormRegister = () => {
             name="email"
           />
         </DivInput>
+
         <DivInput>
           <label htmlFor="senha">Senha</label>
           <input
@@ -39,6 +54,7 @@ const FormRegister = () => {
             name="senha"
           />
         </DivInput>
+
         <DivInput>
           <label htmlFor="confirmarSenha">Confirmar Senha</label>
           <input
@@ -48,6 +64,7 @@ const FormRegister = () => {
             name="confirmarSenha"
           />
         </DivInput>
+
         <DivInput>
           <label htmlFor="bio">Bio</label>
           <input
@@ -57,6 +74,7 @@ const FormRegister = () => {
             name="bio"
           />
         </DivInput>
+
         <DivInput>
           <label htmlFor="contato">Contato</label>
           <input
@@ -66,6 +84,7 @@ const FormRegister = () => {
             name="contato"
           />
         </DivInput>
+
         <DivInput>
           <label htmlFor="modulo">Módulo</label>
           <select name="modulo" id="modulo">
@@ -77,6 +96,7 @@ const FormRegister = () => {
             <option value="Sexto Modulo">Sexto Modulo</option>
           </select>
         </DivInput>
+
         <button type="submit">Cadastrar</button>
       </Form>
     </>

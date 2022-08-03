@@ -18,8 +18,14 @@ export const Navigation = styled.nav`
     display: flex;
   }
 
-  button {
+  a {
     background: var(--color-grey-3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Inter";
+    text-decoration: none;
 
     border-radius: 4px;
     border: none;

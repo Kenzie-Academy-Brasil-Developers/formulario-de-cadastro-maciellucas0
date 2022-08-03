@@ -71,12 +71,27 @@ export const Form = styled.form`
       color: var(--color-grey-1);
     }
 
-    button {
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-family: "Inter";
+      text-decoration: none;
       background-color: var(--color-grey-1);
+
       width: 100%;
+
+      color: var(--color-grey-0);
+
+      border: none;
+      border-radius: 5px;
+
+      height: 38.38px;
+      margin-top: 25px;
     }
 
-    button:hover {
+    a:hover {
       background-color: var(--color-grey-2);
     }
   }

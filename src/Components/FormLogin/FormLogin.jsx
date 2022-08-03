@@ -1,5 +1,6 @@
 import logo from "../../Assets/Logo.png";
 import { Container, DivInput, Form } from "./style";
+import { Link } from "react-router-dom";
 const FormLogin = () => {
   return (
     <>
@@ -24,7 +25,7 @@ const FormLogin = () => {
           <button>Entrar</button>
           <div>
             <p>Ainda não possui uma conta?</p>
-            <button>Cadastre-se</button>
+            <Link to="/registrar">Cadastre-se</Link>
           </div>
         </Form>
       </Container>
