@@ -98,6 +98,7 @@ export const Form = styled.form`
 `;
 
 export const DivInput = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-top: 15px;
@@ -120,5 +121,23 @@ export const DivInput = styled.div`
     margin-top: 10px;
 
     color: white;
+  }
+
+  button {
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+  }
+
+  button:hover {
+    background-color: transparent;
   }
 `;

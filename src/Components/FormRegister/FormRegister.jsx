@@ -1,16 +1,52 @@
-import { DivInput, Form, Navigation } from "./style";
 import logo from "../../Assets/Logo.png";
+import { DivInput, Form, Navigation } from "./style";
+
 import { Link, useNavigate } from "react-router-dom";
 
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { api } from "../../Services/api";
+import { useState } from "react";
+
 const FormRegister = () => {
-  function CadastrandoNaApi() {}
+  const [liberadoCadastro, setLiberadoCadastro] = useState(false);
+
+  const formSchema = yup.object().shape({
+    name: yup.string().required("Campo obrigatótio"),
+    email: yup.string().email("Email inválido"),
+    password: yup.string().min(8, "Minimo 8 caracteres"),
+    confirmPassword: yup.string().required("Campo obrigatório"),
+    bio: yup.string().required("Campo obrigatório"),
+    contact: yup.string().required("Campo obrigatório"),
+
+    course_module: yup.string().required("Campo obrigatório"),
+  });
+
+  const { register, handleSubmit } = useForm({
+    resolver: yupResolver(formSchema),
+  });
 
   const navigate = useNavigate();
-  function handleSubmit(e) {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    console.log(data);
 
-    navigate("/login", { replace: true });
-  }
+    api
+      .post("/users", {
+        email: data.email,
+        password: data.password,
+        name: data.name,
+        bio: data.bio,
+        contact: data.contact,
+        course_module: data.course_module,
+      })
+      .then((response) => {
+        console.log(response);
+        setLiberadoCadastro(true);
+        navigate("/login", { replace: true });
+      })
+      .catch((errors) => console.log(errors));
+  };
 
   return (
     <>
@@ -19,7 +55,7 @@ const FormRegister = () => {
         <Link to="/login">Voltar</Link>
       </Navigation>
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <DivInput>
           <h1>Crie sua conta</h1>
           <span>Rápido e grátis, vamos nessa</span>
@@ -31,7 +67,7 @@ const FormRegister = () => {
             placeholder="Digite aqui seu nome"
             type="text"
             id="nome"
-            name="nome"
+            {...register("name")}
           />
         </DivInput>
 
@@ -41,17 +77,17 @@ const FormRegister = () => {
             placeholder="Digite aqui seu e-mail"
             type="text"
             id="email"
-            name="email"
+            {...register("email")}
           />
         </DivInput>
 
         <DivInput>
           <label htmlFor="senha">Senha</label>
           <input
-            placeholder="Digite aqui ssua senha"
+            placeholder="Digite aqui sua senha"
             type="password"
             id="senha"
-            name="senha"
+            {...register("password")}
           />
         </DivInput>
 
@@ -61,7 +97,7 @@ const FormRegister = () => {
             placeholder="Confirme sua senha"
             type="password"
             id="confirmarSenha"
-            name="confirmarSenha"
+            {...register("confirmPassword")}
           />
         </DivInput>
 
@@ -71,7 +107,7 @@ const FormRegister = () => {
             placeholder="Fale sobre você"
             type="text"
             id="bio"
-            name="bio"
+            {...register("bio")}
           />
         </DivInput>
 
@@ -81,13 +117,13 @@ const FormRegister = () => {
             placeholder="Opção de contato"
             type="text"
             id="contato"
-            name="contato"
+            {...register("contact")}
           />
         </DivInput>
 
         <DivInput>
           <label htmlFor="modulo">Módulo</label>
-          <select name="modulo" id="modulo">
+          <select id="modulo" {...register("course_module")}>
             <option value="Primeiro Modulo">Primeiro Modulo</option>
             <option value="Segundo Modulo">Segundo Modulo</option>
             <option value="Terceiro Modulo">Terceiro Modulo</option>
