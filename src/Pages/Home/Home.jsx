@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Navigation } from "./style";
 import logo from "../../Assets/Logo.png";
 import { Div, Header } from "./style";
+import { FaPlus } from "react-icons/fa";
 
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -19,11 +20,12 @@ const Home = () => {
         <p>{user.course_module}</p>
       </Header>
       <Div>
-        <h2>Que pena! Estamos em desenvolvimento :(</h2>
-        <p>
-          Nossa aplicação está em desenvolvimento, em breve teremos novidades
-        </p>
+        <h2>Tecnologias</h2>
+        <button>
+          <FaPlus />
+        </button>
       </Div>
+      <ul></ul>
     </>
   );
 };

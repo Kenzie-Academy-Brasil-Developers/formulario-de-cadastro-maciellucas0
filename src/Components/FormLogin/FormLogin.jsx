@@ -1,15 +1,16 @@
-import { toast } from "react-hot-toast";
 import logo from "../../Assets/Logo.png";
 import { Container, DivInput, Form } from "./style";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
 import { BsFillEyeSlashFill } from "react-icons/bs";
-import { api } from "../../Services/api";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { UserContext } from "../../contexts/UserContext";
 
 const FormLogin = () => {
+  const { logar } = useContext(UserContext);
+
   const formSchema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Campo obrigatório"),
     password: yup.string().required("Campo obrigatório"),
@@ -22,37 +23,6 @@ const FormLogin = () => {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  const navigate = useNavigate();
-
-  const logar = (data) => {
-    api
-      .post("/sessions", {
-        email: data.email,
-        password: data.password,
-      })
-      .then((response) => {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        toast.success("Login efetuado com sucesso", {
-          duration: 4000,
-          position: "top-center",
-          style: {
-            fontFamily: "Inter",
-          },
-        });
-      })
-      .then(() => navigate("/home", { replace: true }))
-      .catch(() =>
-        toast.error("Usuário ou senha inválidos", {
-          duration: 4000,
-          position: "top-center",
-          style: {
-            fontFamily: "Inter",
-          },
-        })
-      );
-  };
 
   const [senha, setSenha] = useState("password");
   function mostrarSenha(e) {

@@ -43,13 +43,13 @@ export const Header = styled.header`
   width: 100%;
   height: 90px;
 
-  margin: auto;
   margin-top: 30px;
   border-bottom: 0.5px solid var(--color-grey-1);
   border-top: 0.5px solid var(--color-grey-1);
 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin: auto;
   align-items: center;
 
   h2 {
@@ -60,6 +60,7 @@ export const Header = styled.header`
     line-height: 28px;
 
     color: #f8f9fa;
+    margin-left: 5%;
   }
 
   p {
@@ -68,8 +69,22 @@ export const Header = styled.header`
     font-weight: 200;
     font-size: 16px;
     line-height: 24px;
-
+    margin-right: 5%;
     color: var(--color-grey-1);
+  }
+
+  @media (min-width: 800px) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      margin-left: 22.8%;
+    }
+
+    p {
+      margin-right: 22.8%;
+    }
   }
 `;
 export const Div = styled.div`
@@ -77,8 +92,8 @@ export const Div = styled.div`
   height: 90px;
 
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 
   margin-top: 20px;
@@ -93,22 +108,29 @@ export const Div = styled.div`
     color: #f8f9fa;
   }
 
-  p {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 200;
-    font-size: 16px;
-    line-height: 24px;
+  button {
+    background-color: var(--color-grey-3);
+    border: none;
+    border-radius: 5px;
+
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
 
     color: var(--color-grey-1);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @media (max-width: 550px) {
-    margin-top: 40px;
-    h2 {
-      width: 90%;
-      text-align: center;
-    }
+    width: 90%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
     p {
       width: 80%;
       text-align: center;
