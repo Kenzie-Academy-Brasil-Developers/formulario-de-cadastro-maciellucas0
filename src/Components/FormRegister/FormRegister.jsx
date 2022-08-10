@@ -1,14 +1,15 @@
 import logo from "../../Assets/Logo.png";
 import { DivInput, Form, Navigation } from "./style";
-import { toast } from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { api } from "../../Services/api";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 const FormRegister = () => {
+  const { onSubmit } = useContext(UserContext);
+
   const formSchema = yup.object().shape({
     name: yup
       .string()
@@ -37,35 +38,6 @@ const FormRegister = () => {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  const navigate = useNavigate();
-  const onSubmit = (data) => {
-    api
-      .post("/users", {
-        email: data.email,
-        password: data.password,
-        name: data.name,
-        bio: data.bio,
-        contact: data.contact,
-        course_module: data.course_module,
-      })
-      .then((response) => {
-        navigate("/login", { replace: true });
-        toast.success("Conta criada com sucesso", {
-          style: {
-            fontFamily: "Inter",
-          },
-        });
-      })
-      .catch(() => {
-        toast.error("Ops , Algo deu errado , tente trocar o e-mail", {
-          position: "top-right",
-          style: {
-            fontFamily: "Inter",
-          },
-        });
-      });
-  };
 
   return (
     <>

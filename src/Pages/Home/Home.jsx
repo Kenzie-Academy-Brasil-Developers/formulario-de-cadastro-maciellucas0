@@ -3,12 +3,15 @@ import { Navigation } from "./style";
 import logo from "../../Assets/Logo.png";
 import { Div, Header } from "./style";
 import { FaPlus } from "react-icons/fa";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import Modal from "../../Components/Modal";
 
 const Home = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-
+  const { usuario, modal, setModal } = useContext(UserContext);
   return (
     <>
+      {modal && <Modal />}
       <Navigation>
         <img src={logo} alt="logo" />
         <Link onClick={() => localStorage.clear()} to="/login">
@@ -16,12 +19,12 @@ const Home = () => {
         </Link>
       </Navigation>
       <Header>
-        <h2>Olá, {user.name}</h2>
-        <p>{user.course_module}</p>
+        <h2>Olá, {usuario.name}</h2>
+        <p>{usuario.course_module}</p>
       </Header>
       <Div>
         <h2>Tecnologias</h2>
-        <button>
+        <button onClick={() => setModal(!modal)}>
           <FaPlus />
         </button>
       </Div>
