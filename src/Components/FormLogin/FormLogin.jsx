@@ -69,7 +69,6 @@ const FormLogin = () => {
             <Link to="/registro">Cadastre-se</Link>
           </div>
         </Form>
-        {/* {verificado === false && <ToastContainer autoClose={1500} />} */}
       </Container>
     </>
   );

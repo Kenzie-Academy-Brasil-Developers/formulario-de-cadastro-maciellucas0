@@ -3,15 +3,18 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import Provider from "./contexts/UserContext";
+import UserProvider from "./contexts/UserContext";
+import CadastrarProvider from "./contexts/CadastroContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider>
-        <App />
-      </Provider>
+      <UserProvider>
+        <CadastrarProvider>
+          <App />
+        </CadastrarProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

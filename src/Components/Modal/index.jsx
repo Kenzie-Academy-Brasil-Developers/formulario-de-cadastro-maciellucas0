@@ -2,18 +2,16 @@ import { IoMdClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { Container } from "./style";
 import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { CadastroContext } from "../../contexts/CadastroContext";
 
 const Modal = () => {
-  const { modal, setModal, cadastrarTecnologia } = useContext(UserContext);
+  const { cadastrarTecnologia, modal, setModal } = useContext(CadastroContext);
 
   const formSchema = yup.object().shape({
-    nome: yup
-      .string()
-      .required("Campo obrigatório")
-      .max(8, "Máximo 8 carácteres"),
+    nome: yup.string().required("Campo obrigatório"),
+
     status: yup.string().required("Campo obrigatório"),
   });
 
@@ -41,9 +39,8 @@ const Modal = () => {
             placeholder="Tecnologia"
             id="tecnologia"
             {...register("nome")}
-            autoComplete="off"
           />
-          <span>{errors.tecnologia?.message}</span>
+          <span>{errors.nome?.message}</span>
 
           <label htmlFor="status">Status</label>
           <select id="status" {...register("status")}>

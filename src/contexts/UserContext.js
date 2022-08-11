@@ -5,11 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext({});
 
-function Provider({ children }) {
+function UserProvider({ children }) {
   const navigate = useNavigate();
   const [usuario, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     async function loadUser() {
@@ -86,36 +85,6 @@ function Provider({ children }) {
       });
   };
 
-  const cadastrarTecnologia = (data) => {
-    console.log(data);
-    try {
-      api.post(
-        "/users/techs",
-        {
-          title: data.nome,
-          status: data.status,
-        },
-        {
-          headers: `Bearer ${localStorage.getItem("@Context:token")}`,
-        }
-      );
-      toast.success("Tecnologia criada com sucesso", {
-        style: {
-          fontFamily: "Inter",
-        },
-      });
-    } catch (error) {
-      toast.error("Ops , Algo deu errado ", {
-        position: "top-right",
-        style: {
-          fontFamily: "Inter",
-        },
-      });
-    }
-
-    setModal(false);
-  };
-
   return (
     <>
       <UserContext.Provider
@@ -124,9 +93,6 @@ function Provider({ children }) {
           onSubmit,
           usuario,
           loading,
-          modal,
-          setModal,
-          cadastrarTecnologia,
         }}
       >
         {children}
@@ -135,4 +101,4 @@ function Provider({ children }) {
   );
 }
 
-export default Provider;
+export default UserProvider;

@@ -137,3 +137,25 @@ export const Div = styled.div`
     }
   }
 `;
+
+export const UlTechs = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+
+  margin: auto;
+  gap: 15px;
+
+  padding: 3%;
+
+  background-color: var(--color-grey-2);
+
+  border-radius: 3px;
+
+  @media (min-width: 700px) {
+    width: 50%;
+
+    padding: 1%;
+  }
+`;
