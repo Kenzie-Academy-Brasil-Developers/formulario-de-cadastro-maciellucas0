@@ -3,12 +3,21 @@ import { Navigation } from "./style";
 import logo from "../../Assets/Logo.png";
 import { Div, Header } from "./style";
 import { FaPlus } from "react-icons/fa";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import Modal from "../../Components/Modal";
+import { api } from "../../Services/api";
 
 const Home = () => {
   const { usuario, modal, setModal } = useContext(UserContext);
+  const [techs, setTech] = useState([]);
+
+  useEffect(() => {
+    api
+      .get("/profile", localStorage.getItem("@Context:token"))
+      .then((response) => setTech(response.data.techs));
+  }, [setTech]);
+
   return (
     <>
       {modal && <Modal />}

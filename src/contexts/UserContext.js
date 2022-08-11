@@ -86,9 +86,34 @@ function Provider({ children }) {
       });
   };
 
-  const cadastrarTecnologia = async (e, data) => {
-    e.preventDefault();
+  const cadastrarTecnologia = (data) => {
     console.log(data);
+    try {
+      api.post(
+        "/users/techs",
+        {
+          title: data.nome,
+          status: data.status,
+        },
+        {
+          headers: `Bearer ${localStorage.getItem("@Context:token")}`,
+        }
+      );
+      toast.success("Tecnologia criada com sucesso", {
+        style: {
+          fontFamily: "Inter",
+        },
+      });
+    } catch (error) {
+      toast.error("Ops , Algo deu errado ", {
+        position: "top-right",
+        style: {
+          fontFamily: "Inter",
+        },
+      });
+    }
+
+    setModal(false);
   };
 
   return (

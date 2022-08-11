@@ -7,6 +7,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const Modal = () => {
+  const { modal, setModal, cadastrarTecnologia } = useContext(UserContext);
+
   const formSchema = yup.object().shape({
     nome: yup
       .string()
@@ -23,8 +25,6 @@ const Modal = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const { modal, setModal, cadastrarTecnologia } = useContext(UserContext);
-
   return (
     <>
       <Container>
@@ -34,13 +34,14 @@ const Modal = () => {
             <IoMdClose />
           </button>
         </div>
-        <form onSubmit={() => handleSubmit(cadastrarTecnologia)}>
+        <form onSubmit={handleSubmit(cadastrarTecnologia)}>
           <label htmlFor="tecnologia">Nome</label>
           <input
             type="text"
             placeholder="Tecnologia"
             id="tecnologia"
             {...register("nome")}
+            autoComplete="off"
           />
           <span>{errors.tecnologia?.message}</span>
 
