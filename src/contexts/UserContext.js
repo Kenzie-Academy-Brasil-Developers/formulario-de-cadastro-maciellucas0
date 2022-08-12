@@ -32,7 +32,7 @@ function UserProvider({ children }) {
   const logar = async (data) => {
     try {
       const response = await api.post("/sessions", data);
-      const { user: userResponse, token } = response.data;
+      const { user, token } = response.data;
 
       localStorage.setItem("@Context:token", token);
       toast.success("Login efetuado com sucesso", {
@@ -42,7 +42,7 @@ function UserProvider({ children }) {
           fontFamily: "Inter",
         },
       });
-      setUser(userResponse);
+      setUser(user);
       navigate("/home", { replace: true });
 
       api.defaults.headers.authorization = `Bearer ${token}`;

@@ -9,35 +9,37 @@ function CadastrarProvider({ children }) {
 
   const cadastrarTecnologia = (data) => {
     console.log(data);
-    try {
-      api
-        .post(
-          "/users/techs",
-          {
-            title: data.nome,
-            status: data.status,
+
+    api
+      .post(
+        "/users/techs",
+        {
+          title: data.nome,
+          status: data.status,
+        },
+        {
+          headers: `Bearer ${localStorage.getItem("@Context:token")}`,
+        }
+      )
+      .then(() => {
+        toast.success("Tecnologia criada com sucesso", {
+          style: {
+            fontFamily: "Inter",
           },
+        });
+        setModal(false);
+      })
+      .catch((error) => {
+        toast.error(
+          "Ops , Algo deu errado, tente trocar o nome da tecnologia ",
           {
-            headers: `Bearer ${localStorage.getItem("@Context:token")}`,
-          }
-        )
-        .then(() => {
-          toast.success("Tecnologia criada com sucesso", {
+            position: "top-right",
             style: {
               fontFamily: "Inter",
             },
-          });
-        });
-    } catch (error) {
-      toast.error("Ops , Algo deu errado ", {
-        position: "top-right",
-        style: {
-          fontFamily: "Inter",
-        },
+          }
+        );
       });
-    }
-
-    setModal(false);
   };
 
   return (

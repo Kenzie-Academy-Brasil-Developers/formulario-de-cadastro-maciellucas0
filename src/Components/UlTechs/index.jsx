@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { FaTrashAlt } from "react-icons/fa";
 import { api } from "../../Services/api";
 import { LiTechs } from "./style";
@@ -7,19 +8,29 @@ const ListaTechs = ({ techs, setTech }) => {
     console.log(id);
 
     api
-      .post(`/users/techs/${id}`, {
-        headers: `Bearer ${localStorage.getItem("@Context:token")}`,
-      })
+      .delete(`/users/techs/${id}`)
       .then(() => {
         const result = techs.filter((item) => id !== item.id);
         setTech(result);
+        toast.success("Tecnologia Deletada com sucesso", {
+          style: {
+            fontFamily: "Inter",
+          },
+        });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        toast.error("Ops , Algo deu errado. ", {
+          style: {
+            fontFamily: "Inter",
+          },
+        });
+      });
   }
 
   return (
     <>
-      {techs.map((tecnologia) => (
+      {techs?.map((tecnologia) => (
         <LiTechs key={tecnologia.id}>
           <h2>{tecnologia.title}</h2>
           <p>{tecnologia.status}</p>
