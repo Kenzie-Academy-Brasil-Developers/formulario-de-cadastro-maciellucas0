@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     api.get("/profile").then((response) => setTech(response.data.techs));
-  }, []);
+  }, [techs]);
 
   return (
     <>
