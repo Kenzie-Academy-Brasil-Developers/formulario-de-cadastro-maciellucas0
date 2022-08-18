@@ -125,19 +125,28 @@ export const DivInput = styled.div`
 
   button {
     background-color: transparent;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     position: absolute;
-    bottom: 5px;
-    right: 15px;
+    right: 5%;
   }
 
   button:hover {
     background-color: transparent;
+  }
+
+  span {
+    font-family: "Inter";
+    font-size: 0.8rem;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 3px;
+    color: rgba(255, 0, 43, 0.79);
   }
 `;

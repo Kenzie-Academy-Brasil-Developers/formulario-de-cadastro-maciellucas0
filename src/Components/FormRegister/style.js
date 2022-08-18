@@ -136,4 +136,20 @@ export const DivInput = styled.div`
     margin-top: 10px;
     color: var(--color-grey-1);
   }
+
+  span {
+    font-family: "Inter";
+    font-size: 0.8rem;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 3px;
+    color: rgba(255, 0, 43, 0.79);
+  }
+
+  #span {
+    margin: auto;
+    margin-top: 20px;
+    color: var(--color-grey-1);
+  }
 `;

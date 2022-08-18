@@ -1,52 +1,43 @@
 import logo from "../../Assets/Logo.png";
 import { DivInput, Form, Navigation } from "./style";
-
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { api } from "../../Services/api";
-import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 const FormRegister = () => {
-  const [liberadoCadastro, setLiberadoCadastro] = useState(false);
+  const { onSubmit } = useContext(UserContext);
 
   const formSchema = yup.object().shape({
-    name: yup.string().required("Campo obrigatótio"),
-    email: yup.string().email("Email inválido"),
-    password: yup.string().min(8, "Minimo 8 caracteres"),
-    confirmPassword: yup.string().required("Campo obrigatório"),
+    name: yup
+      .string()
+      .required("Campo obrigatótio")
+      .max(20, "Máximo 20 caracteres"),
+
+    email: yup.string().email("Email inválido").required("Campo obrigatório"),
+
+    password: yup.string().min(6, "Minimo 6 caracteres"),
+
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password")], "As senhas devem ser iguais."),
+
     bio: yup.string().required("Campo obrigatório"),
+
     contact: yup.string().required("Campo obrigatório"),
 
     course_module: yup.string().required("Campo obrigatório"),
   });
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  const navigate = useNavigate();
-  const onSubmit = (data) => {
-    console.log(data);
-
-    api
-      .post("/users", {
-        email: data.email,
-        password: data.password,
-        name: data.name,
-        bio: data.bio,
-        contact: data.contact,
-        course_module: data.course_module,
-      })
-      .then((response) => {
-        console.log(response);
-        setLiberadoCadastro(true);
-        navigate("/login", { replace: true });
-      })
-      .catch((errors) => console.log(errors));
-  };
 
   return (
     <>
@@ -58,7 +49,7 @@ const FormRegister = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <DivInput>
           <h1>Crie sua conta</h1>
-          <span>Rápido e grátis, vamos nessa</span>
+          <span id="span">Rápido e grátis, vamos nessa</span>
         </DivInput>
 
         <DivInput>
@@ -69,6 +60,7 @@ const FormRegister = () => {
             id="nome"
             {...register("name")}
           />
+          <span>{errors.name?.message}</span>
         </DivInput>
 
         <DivInput>
@@ -79,6 +71,7 @@ const FormRegister = () => {
             id="email"
             {...register("email")}
           />
+          <span>{errors.email?.message}</span>
         </DivInput>
 
         <DivInput>
@@ -89,6 +82,7 @@ const FormRegister = () => {
             id="senha"
             {...register("password")}
           />
+          <span>{errors.password?.message}</span>
         </DivInput>
 
         <DivInput>
@@ -99,6 +93,7 @@ const FormRegister = () => {
             id="confirmarSenha"
             {...register("confirmPassword")}
           />
+          <span>{errors.confirmPassword?.message}</span>
         </DivInput>
 
         <DivInput>
@@ -109,6 +104,7 @@ const FormRegister = () => {
             id="bio"
             {...register("bio")}
           />
+          <span>{errors.bio?.message}</span>
         </DivInput>
 
         <DivInput>
@@ -119,6 +115,7 @@ const FormRegister = () => {
             id="contato"
             {...register("contact")}
           />
+          <span>{errors.contact?.message}</span>
         </DivInput>
 
         <DivInput>
@@ -131,6 +128,7 @@ const FormRegister = () => {
             <option value="Quinto Modulo">Quinto Modulo</option>
             <option value="Sexto Modulo">Sexto Modulo</option>
           </select>
+          <span>{errors.course_module?.message}</span>
         </DivInput>
 
         <button type="submit">Cadastrar</button>
