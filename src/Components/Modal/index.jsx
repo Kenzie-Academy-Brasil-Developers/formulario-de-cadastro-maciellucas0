@@ -4,6 +4,7 @@ import { Container } from "./style";
 import { useContext } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+<<<<<<< HEAD
 import { CadastroTechContext } from "../../contexts/CadastroTechContext";
 import toast from "react-hot-toast";
 import { api } from "../../Services/api";
@@ -11,6 +12,12 @@ import { api } from "../../Services/api";
 const Modal = () => {
   const { modal, setModal, setReloadTechs, reloadTechs } =
     useContext(CadastroTechContext);
+=======
+import { CadastroContext } from "../../contexts/CadastroContext";
+
+const Modal = () => {
+  const { cadastrarTecnologia, modal, setModal } = useContext(CadastroContext);
+>>>>>>> 86c279010144fc4804c4de034126cc39c2b06109
 
   const formSchema = yup.object().shape({
     nome: yup.string().required("Campo obrigatório"),
@@ -26,6 +33,7 @@ const Modal = () => {
     resolver: yupResolver(formSchema),
   });
 
+<<<<<<< HEAD
   const cadastrarTecnologia = (data) => {
     console.log(data);
 
@@ -62,6 +70,8 @@ const Modal = () => {
       });
   };
 
+=======
+>>>>>>> 86c279010144fc4804c4de034126cc39c2b06109
   return (
     <>
       <Container>

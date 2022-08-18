@@ -8,17 +8,29 @@ import { UserContext } from "../../contexts/UserContext";
 import Modal from "../../Components/Modal";
 import { api } from "../../Services/api";
 import ListaTechs from "../../Components/UlTechs";
+<<<<<<< HEAD
 import { CadastroTechContext } from "../../contexts/CadastroTechContext";
 
 const Home = () => {
   const { reloadTechs } = useContext(CadastroTechContext);
   const { usuario } = useContext(UserContext);
   const { modal, setModal } = useContext(CadastroTechContext);
+=======
+import { CadastroContext } from "../../contexts/CadastroContext";
+
+const Home = () => {
+  const { usuario } = useContext(UserContext);
+  const { modal, setModal } = useContext(CadastroContext);
+>>>>>>> 86c279010144fc4804c4de034126cc39c2b06109
   const [techs, setTech] = useState([]);
 
   useEffect(() => {
     api.get("/profile").then((response) => setTech(response.data.techs));
+<<<<<<< HEAD
   }, [reloadTechs]);
+=======
+  }, [techs]);
+>>>>>>> 86c279010144fc4804c4de034126cc39c2b06109
 
   return (
     <>
