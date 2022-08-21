@@ -26,7 +26,7 @@ const Modal = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const cadastrarTecnologia = (data) => {
+  const cadastrarTecnologia = (data: { nome: string; status: string }) => {
     console.log(data);
 
     api

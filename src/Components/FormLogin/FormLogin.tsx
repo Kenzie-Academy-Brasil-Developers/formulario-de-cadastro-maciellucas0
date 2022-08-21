@@ -25,7 +25,7 @@ const FormLogin = () => {
   });
 
   const [senha, setSenha] = useState("password");
-  function mostrarSenha(e) {
+  function mostrarSenha(e: { preventDefault: () => void }) {
     e.preventDefault();
     if (senha === "password") {
       setSenha("text");
