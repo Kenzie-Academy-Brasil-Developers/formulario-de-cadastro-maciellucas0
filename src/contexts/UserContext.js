@@ -1,42 +1,14 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { api } from "../Services/api";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { HeadersDefaults } from "axios";
 
 export const UserContext = createContext({});
 
-interface IChildren {
-  children: ReactNode;
-}
-
-interface ILogin {
-  email: string;
-  password: string;
-}
-
-interface ICadastro {
-  email: string;
-  password: string;
-  name: string;
-  bio: string;
-  contact: string;
-  course_module: string;
-}
-
-interface CommonHeaderProperties extends HeadersDefaults {
-  Authorization: string;
-}
-
-function UserProvider({ children }: IChildren) {
+function UserProvider({ children }) {
   const navigate = useNavigate();
-
   const [usuario, setUser] = useState(null);
-<<<<<<< HEAD
   const [loading, setLoading] = useState(true);
-=======
-  const [loading, setLoading] = useState<boolean>(true);
->>>>>>> 49e07a0d8eb7297f03824eebb4621ec4986a579c
 
   useEffect(() => {
     async function loadUser() {
@@ -44,9 +16,7 @@ function UserProvider({ children }: IChildren) {
 
       if (token) {
         try {
-          api.defaults.headers = {
-            Authorization: `Bearer ${token}`,
-          } as CommonHeaderProperties;
+          api.defaults.headers.authorization = `Bearer ${token}`;
           const { data } = await api.get("/profile");
 
           setUser(data);
@@ -59,7 +29,7 @@ function UserProvider({ children }: IChildren) {
     loadUser();
   }, []);
 
-  const logar = async (data: ILogin) => {
+  const logar = async (data) => {
     try {
       const response = await api.post("/sessions", data);
       const { user, token } = response.data;
@@ -75,9 +45,7 @@ function UserProvider({ children }: IChildren) {
       setUser(user);
       navigate("/home", { replace: true });
 
-      api.defaults.headers = {
-        Authorization: `Bearer ${token}`,
-      } as CommonHeaderProperties;
+      api.defaults.headers.authorization = `Bearer ${token}`;
     } catch (error) {
       toast.error("Usuário ou senha inválidos", {
         duration: 4000,
@@ -89,7 +57,7 @@ function UserProvider({ children }: IChildren) {
     }
   };
 
-  const onSubmit = (data: ICadastro) => {
+  const onSubmit = (data) => {
     api
       .post("/users", {
         email: data.email,

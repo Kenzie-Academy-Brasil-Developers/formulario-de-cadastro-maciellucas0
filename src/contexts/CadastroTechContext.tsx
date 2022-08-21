@@ -7,8 +7,13 @@ interface IChildren {
 }
 
 function CadastrarTechProvider({ children }: IChildren) {
+<<<<<<< HEAD
   const [modal, setModal] = useState<boolean>(false);
   const [reloadTechs, setReloadTechs] = useState<boolean>(false);
+=======
+  const [modal, setModal] = useState(false);
+  const [reloadTechs, setReloadTechs] = useState(false);
+>>>>>>> 49e07a0d8eb7297f03824eebb4621ec4986a579c
 
   return (
     <CadastroTechContext.Provider
