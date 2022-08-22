@@ -4,7 +4,14 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { HeadersDefaults } from "axios";
 
-export const UserContext = createContext({});
+interface Context {
+  logar: any;
+  onSubmit: any;
+  usuario: any;
+  loading: any;
+}
+
+export const UserContext = createContext({} as Context);
 
 interface IChildren {
   children: ReactNode;
@@ -22,6 +29,7 @@ interface ICadastro {
   bio: string;
   contact: string;
   course_module: string;
+  onSubmit: any;
 }
 
 interface CommonHeaderProperties extends HeadersDefaults {
@@ -32,11 +40,7 @@ function UserProvider({ children }: IChildren) {
   const navigate = useNavigate();
 
   const [usuario, setUser] = useState(null);
-<<<<<<< HEAD
   const [loading, setLoading] = useState(true);
-=======
-  const [loading, setLoading] = useState<boolean>(true);
->>>>>>> 49e07a0d8eb7297f03824eebb4621ec4986a579c
 
   useEffect(() => {
     async function loadUser() {

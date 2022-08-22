@@ -3,7 +3,12 @@ import { FaTrashAlt } from "react-icons/fa";
 import { api } from "../../Services/api";
 import { LiTechs } from "./style";
 
-const ListaTechs = ({ techs, setTech }) => {
+interface teste {
+  techs: any;
+  setTech: any;
+}
+
+const ListaTechs = ({ techs, setTech }: teste) => {
   function removeTech(id: string) {
     api
       .delete(`/users/techs/${id}`)

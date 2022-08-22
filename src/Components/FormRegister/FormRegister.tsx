@@ -60,7 +60,7 @@ const FormRegister = () => {
             id="nome"
             {...register("name")}
           />
-          <span>{errors.name?.message}</span>
+          <span>{errors.name?.message as unknown as string}</span>
         </DivInput>
 
         <DivInput>
@@ -71,7 +71,7 @@ const FormRegister = () => {
             id="email"
             {...register("email")}
           />
-          <span>{errors.email?.message}</span>
+          <span>{errors.email?.message as unknown as string}</span>
         </DivInput>
 
         <DivInput>
@@ -82,7 +82,7 @@ const FormRegister = () => {
             id="senha"
             {...register("password")}
           />
-          <span>{errors.password?.message}</span>
+          <span>{errors.password?.message as unknown as string}</span>
         </DivInput>
 
         <DivInput>
@@ -93,7 +93,7 @@ const FormRegister = () => {
             id="confirmarSenha"
             {...register("confirmPassword")}
           />
-          <span>{errors.confirmPassword?.message}</span>
+          <span>{errors.confirmPassword?.message as unknown as string}</span>
         </DivInput>
 
         <DivInput>
@@ -104,7 +104,7 @@ const FormRegister = () => {
             id="bio"
             {...register("bio")}
           />
-          <span>{errors.bio?.message}</span>
+          <span>{errors.bio?.message as unknown as string}</span>
         </DivInput>
 
         <DivInput>
@@ -115,7 +115,7 @@ const FormRegister = () => {
             id="contato"
             {...register("contact")}
           />
-          <span>{errors.contact?.message}</span>
+          <span>{errors.contact?.message as unknown as string}</span>
         </DivInput>
 
         <DivInput>
@@ -128,7 +128,7 @@ const FormRegister = () => {
             <option value="Quinto Modulo">Quinto Modulo</option>
             <option value="Sexto Modulo">Sexto Modulo</option>
           </select>
-          <span>{errors.course_module?.message}</span>
+          <span>{errors.course_module?.message as unknown as string}</span>
         </DivInput>
 
         <button type="submit">Cadastrar</button>

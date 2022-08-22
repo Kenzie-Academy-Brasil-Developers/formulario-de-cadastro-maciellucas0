@@ -48,7 +48,7 @@ const FormLogin = () => {
               id="email"
               {...register("email")}
             />
-            <span>{errors.email?.message}</span>
+            <span>{errors.email?.message as unknown as string}</span>
           </DivInput>
           <DivInput>
             <label htmlFor="senha">Senha</label>
@@ -58,7 +58,7 @@ const FormLogin = () => {
               id="senha"
               {...register("password")}
             />
-            <span>{errors.password?.message}</span>
+            <span>{errors.password?.message as unknown as string}</span>
             <button type="button" onClick={mostrarSenha}>
               <BsFillEyeSlashFill />
             </button>
