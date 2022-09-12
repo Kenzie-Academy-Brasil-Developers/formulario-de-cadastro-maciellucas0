@@ -44,6 +44,7 @@ const Home = () => {
       <UlTechs>
         <ListaTechs techs={teste} setTech={setTeste} />
       </UlTechs>
+      <div></div>
     </>
   );
 };
